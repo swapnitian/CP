@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+using namespace std ;
+int main()
+{
+    int T ;
+    cin >> T ;
+
+    while(T--){
+        int n ;
+        cin >> n ;
+
+        string s , t ;
+        cin >> s >> t ;
+        
+        sort(t.begin() , t.end()) ;
+        sort(s.begin() , s.end()) ;
+
+        if(s == t) cout << "YES\n" ;
+        else cout << "NO\n" ;
+    }
+
+}
