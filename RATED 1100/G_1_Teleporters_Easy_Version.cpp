@@ -14,7 +14,6 @@ int main()
         for(int i = 0 ; i < n ; i++) cin >> arr[i] ;
 
         vector<int> v(n ,0) ;
-
         for(int i = 0 ; i< n ; i++){
             v[i] = arr[i]+i+1 ;
         }
