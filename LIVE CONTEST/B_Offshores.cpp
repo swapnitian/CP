@@ -16,7 +16,7 @@ int main()
 
             total_sum += (arr[i]/x)*y ;
         }
-        long long ans = 0 ;g
+        long long ans = 0 ;
         for(int i = 0 ; i < n ; i++){
             long long curr = (arr[i]/x)*y ;
             long long curr_sum = total_sum - curr + arr[i] ;
