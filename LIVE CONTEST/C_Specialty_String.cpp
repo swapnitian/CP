@@ -11,17 +11,15 @@ int main()
 
         string s ;
         cin >> s ;
-        stack<pair<char,int>> st ;
+        stack<char> st ;
         
         for(int i = 0 ; i < n ; i++){
-            if(i == 0)st.push({s[i] , 0}) ;
+            if(i == 0)st.push(s[i]) ;
             else{
-                if(!st.empty() && st.top().first == s[i]){
-                    s[i] = '*' ;
-                    s[st.top().second] = '*' ;
+                if(!st.empty() && st.top()== s[i]){
                     st.pop() ;
                 }else {
-                    st.push({s[i] , i}) ;
+                    st.push(s[i]) ;
                 }
             }
         }
