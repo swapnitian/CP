@@ -1,48 +1,47 @@
 #include <bits/stdc++.h> 
 using namespace std ;
+using ll = long long;
 int main()
 {
     int T ;
     cin >> T ;
 
     while(T--){
-        int n ;
+        ll n ;
         cin >> n;
 
-        vector<int> v(n) ;
-        int sum = 0 ;
-        for(int i = 0 ; i < n ; i++){
-            cin >> v[i] ;
+        vector<int> arr(n) ;
         
-            sum += v[i] ;
-        }
-        int min_v = 0 ;
-        int idx = 0 ;
-
-        if(v[n-1] == 1) cout << sum-1 << endl;
-        else if(n == 2){
-            if(v[0] > v[1]){
-                cout << v[0]-v[1] + 1 ;
-            }else {
-                cout << 0 << endl;
-            }
-        } 
-        else{
-            for(int i = n-2 ; i > 0 ; i--){
-                if(v[i] < v[i+1] && v[i] <= v[i-1]){
-                    min_v = v[i]-1 ;
-                    idx = i ;
-                    break;
-                }
-            }
-            int moves = 0 ;
-            for(int i = 0 ; i < idx ; i++){
-                if(v[i] > min_v) {
-                    moves += v[i] - min_v ;
-                }
-            }
-            cout << moves << endl;
+        for(int i = 0 ; i < n ; i++){
+            cin >> arr[i];
         }
 
+        // create the suffix array 
+        vector<int> suff(n) ;
+
+        suff[n-1] = arr[n-1];
+
+        for(int i = n-2; i >= 0; i--){
+            suff[i] = min(suff[i+1] , arr[i]);
+        }
+        ll ans = 0;
+        for(int i = 0 ; i < n ; i++){
+            ans += arr[i]-suff[i] ;
+        }
+        
+        ll cnt = 1;
+        ll maxB = 0;
+
+        for(int i = 0; i < n-1; i++){
+            if(suff[i] == suff[i+1]){
+                cnt++;
+            }else{
+                maxB = max(cnt-1 , maxB);
+                cnt = 1;
+            }
+        }
+        maxB = max(cnt-1 , maxB);
+
+        cout << ans + maxB << endl;
     }
 }
