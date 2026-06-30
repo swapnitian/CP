@@ -1,40 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std ;
-int main()
-{
-    int T ;
-    cin >> T ;
-
-    while(T--){
-        int n ;
-        cin >> n ;
-
-        vector<int> arr(3*n) ;
-
-        for(int i = 0 ; i < 3*n ; i++){
-            arr[i] = i+1 ;
-        }
-        sort(arr.rbegin() , arr.rend()) ;
-        
-        int no = 1 ;
-        int it = 0 ;
-        vector<int> ans ;
-        for(int i = 0 ; i < 3*n ; i++){
-            if((i+1)%3 == 0){
-                ans.push_back(no) ;
-                no++ ;
-            }else{
-                ans.push_back(arr[it]) ;
-                it++ ;
-            }
-        }
-        
-        for(int v : ans){
-            cout << v << " " ;
-        }
-        cout << endl;
-    }
-}
 /*
     ███████╗ ██╗    ██╗  █████╗  ██████╗  ███╗   ██╗ ██╗ ████████╗
     ██╔════╝ ██║    ██║ ██╔══██╗ ██╔══██╗ ████╗  ██║ ██║ ╚══██╔══╝
@@ -158,16 +121,52 @@ ll lcmll(ll a, ll b) {
 
 // ===================== SOLVE =====================
 void solve() {
+    int n;
+    cin >> n;
+
+    vector<ll> a(n);
+    vector<ll> b(n);
+
+    for(int i = 0; i < n; i++) cin >> a[i];
+    for(int i = 0; i < n; i++) cin >> b[i];
+    int operations = 0;
+    for(int i = 0; i < n; i++){
+        if(a[i] <= b[i]){
+            a[i] = b[i];
+            continue;
+        }
+        int idx = -1;
+        for(int j = i+1; j < n; j++){
+            if(a[j] <= b[i]){
+                idx = j;
+                break;
+            }
+        }
+
+        if(idx == -1){
+            cout << -1 << endl;
+            return;
+        }
+        // cout << idx << endl;
+        for(int j = idx; j != i && j > 0; j--){
+            swap(a[j] , a[j-1]);
+            operations++;
+            // cout << a[j] << " " << a[j-1] << endl;
+            // if(j == i) break;
+        }
+    }
     
+    // for(int i = 0; i < n; i++) cout << a[i] << " ";
+
+    cout << operations << endl;
+    return;
 }
 
 int main() {
     fastIO();
-    precomputeFactorials();
-    // sieve();
 
-    int T = 1;
-
+    int T;
+    cin >> T;
     while (T--) {
         solve();
     }

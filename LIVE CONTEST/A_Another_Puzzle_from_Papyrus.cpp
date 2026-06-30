@@ -1,40 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std ;
-int main()
-{
-    int T ;
-    cin >> T ;
-
-    while(T--){
-        int n ;
-        cin >> n ;
-
-        vector<int> arr(3*n) ;
-
-        for(int i = 0 ; i < 3*n ; i++){
-            arr[i] = i+1 ;
-        }
-        sort(arr.rbegin() , arr.rend()) ;
-        
-        int no = 1 ;
-        int it = 0 ;
-        vector<int> ans ;
-        for(int i = 0 ; i < 3*n ; i++){
-            if((i+1)%3 == 0){
-                ans.push_back(no) ;
-                no++ ;
-            }else{
-                ans.push_back(arr[it]) ;
-                it++ ;
-            }
-        }
-        
-        for(int v : ans){
-            cout << v << " " ;
-        }
-        cout << endl;
-    }
-}
 /*
     ███████╗ ██╗    ██╗  █████╗  ██████╗  ███╗   ██╗ ██╗ ████████╗
     ██╔════╝ ██║    ██║ ██╔══██╗ ██╔══██╗ ████╗  ██║ ██║ ╚══██╔══╝
@@ -158,16 +121,50 @@ ll lcmll(ll a, ll b) {
 
 // ===================== SOLVE =====================
 void solve() {
-    
+    int n , c;
+    cin >> n >> c;
+
+    int a[n] , b[n];
+
+    multiset<int> st;
+    for(int i = 0; i < n; i++){
+        cin >> a[i];
+
+        st.insert(a[i]);
+    }
+    for(int i = 0; i < n; i++) cin >> b[i];
+
+    int ans = 0;
+    // 1st operation 
+    for(int i = 0; i < n; i++){
+        if(a[i] < b[i]){
+            ans = INT_MAX;
+            break;
+        }
+        ans += a[i]-b[i];
+    }
+    int ans2 = c;
+    sort(a , a+n);
+    sort(b , b+n);
+
+    for(int i = 0; i < n; i++){
+        if(a[i] < b[i]){
+            ans2 = INT_MAX;
+            break;
+        }
+        ans2 += a[i]-b[i];
+    }
+    ans = min(ans2 , ans);
+
+    if(ans == INT_MAX) cout << -1 << endl;
+    else cout << ans << endl;
 }
 
 int main() {
     fastIO();
-    precomputeFactorials();
-    // sieve();
 
-    int T = 1;
-
+    int T;
+    cin >> T;
     while (T--) {
         solve();
     }

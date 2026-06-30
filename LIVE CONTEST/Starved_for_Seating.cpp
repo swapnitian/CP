@@ -1,40 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std ;
-int main()
-{
-    int T ;
-    cin >> T ;
-
-    while(T--){
-        int n ;
-        cin >> n ;
-
-        vector<int> arr(3*n) ;
-
-        for(int i = 0 ; i < 3*n ; i++){
-            arr[i] = i+1 ;
-        }
-        sort(arr.rbegin() , arr.rend()) ;
-        
-        int no = 1 ;
-        int it = 0 ;
-        vector<int> ans ;
-        for(int i = 0 ; i < 3*n ; i++){
-            if((i+1)%3 == 0){
-                ans.push_back(no) ;
-                no++ ;
-            }else{
-                ans.push_back(arr[it]) ;
-                it++ ;
-            }
-        }
-        
-        for(int v : ans){
-            cout << v << " " ;
-        }
-        cout << endl;
-    }
-}
 /*
     ███████╗ ██╗    ██╗  █████╗  ██████╗  ███╗   ██╗ ██╗ ████████╗
     ██╔════╝ ██║    ██║ ██╔══██╗ ██╔══██╗ ████╗  ██║ ██║ ╚══██╔══╝
@@ -158,7 +121,31 @@ ll lcmll(ll a, ll b) {
 
 // ===================== SOLVE =====================
 void solve() {
+    ll  n , k;
+    cin >> n >> k;
     
+    vector<ll> arr(n);
+    
+    for(int i = 0; i < n; i++) cin >> arr[i];
+    
+    ll ans = 0;
+    ll sum = 0;
+    for(int i = 0; i < n; i++){
+        sum += arr[i];
+    }
+    // cout << sum << endl;
+    for(int i = 0; i < n; i++){
+        for(int j = i+1; j < n; j++){
+            ll val = (sum-arr[i]-arr[j])/2 + arr[i] + arr[j];
+        
+            if(val > k){
+                ans++;
+            }
+            // cout << val << endl;
+        }
+        // sum -= arr[i];
+    }
+    cout << ans << endl;
 }
 
 int main() {
@@ -166,8 +153,8 @@ int main() {
     precomputeFactorials();
     // sieve();
 
-    int T = 1;
-
+    int T;
+    cin >> T;
     while (T--) {
         solve();
     }
